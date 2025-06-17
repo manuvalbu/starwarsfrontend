@@ -48,7 +48,7 @@ describe('PeopleTableComponent', () => {
     fixture.detectChanges();
 
     expect(swapiService.getAllPeople).toHaveBeenCalled();
-    expect(component.people).toEqual(mockPeople);
+    expect(component.peopleDataSource.data).toEqual(mockPeople);
     expect(component.isLoading).toBeFalse();
   });
 });

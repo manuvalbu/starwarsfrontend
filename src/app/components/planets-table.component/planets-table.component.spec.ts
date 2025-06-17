@@ -49,7 +49,7 @@ describe('PlanetsTableComponent', () => {
     fixture.detectChanges();
 
     expect(swapiService.getAllPlanets).toHaveBeenCalled();
-    expect(component.planets).toEqual(mockPlanets);
+    expect(component.planetsDataSource.data).toEqual(mockPlanets);
     expect(component.isLoading).toBeFalse();
   });
 });

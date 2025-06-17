@@ -1,34 +1,63 @@
-<h2>Planets</h2>
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
 
-<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="!isLoading">
+  <table mat-table [dataSource]="planetsDataSource" matSort class="mat-elevation-z8">
 
-<table *ngIf="!isLoading" border="1">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Climate</th>
-    <th>Terrain</th>
-    <th>Population</th>
-    <th>RotationPeriod</th>
-    <th>OrbitalPeriod</th>
-    <th>Diameter</th>
-    <th>Gravity</th>
-    <th>SurfaceWater</th>
-    <th>Created</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let planet of planets">
-    <td>{{ planet.name }}</td>
-    <td>{{ planet.climate }}</td>
-    <td>{{ planet.terrain }}</td>
-    <td>{{ planet.population }}</td>
-    <td>{{ planet.rotationPeriod }}</td>
-    <td>{{ planet.orbitalPeriod }}</td>
-    <td>{{ planet.diameter }}</td>
-    <td>{{ planet.gravity }}</td>
-    <td>{{ planet.surfaceWater }}</td>
-    <td>{{ planet.created | date }}</td>
-  </tr>
-  </tbody>
-</table>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let p"> {{ p.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="climate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Climate </th>
+      <td mat-cell *matCellDef="let p"> {{ p.climate }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="terrain">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Terrain </th>
+      <td mat-cell *matCellDef="let p"> {{ p.terrain }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="population">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Population </th>
+      <td mat-cell *matCellDef="let p"> {{ p.population }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rotationPeriod">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Rotation Period </th>
+      <td mat-cell *matCellDef="let p"> {{ p.rotationPeriod }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orbitalPeriod">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Orbital Period </th>
+      <td mat-cell *matCellDef="let p"> {{ p.orbitalPeriod }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="diameter">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Diameter </th>
+      <td mat-cell *matCellDef="let p"> {{ p.diameter }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gravity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gravity </th>
+      <td mat-cell *matCellDef="let p"> {{ p.gravity }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="surfaceWater">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Surface Water </th>
+      <td mat-cell *matCellDef="let p"> {{ p.surfaceWater }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+      <td mat-cell *matCellDef="let p"> {{ p.created | date:'medium' }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

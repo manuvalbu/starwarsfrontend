@@ -1,32 +1,58 @@
-<h2>People</h2>
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
 
-<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="!isLoading">
+  <table mat-table [dataSource]="peopleDataSource" matSort class="mat-elevation-z8">
 
-<table *ngIf="!isLoading" border="1">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Gender</th>
-    <th>Birth Year</th>
-    <th>Height</th>
-    <th>Mass</th>
-    <th>Hair color</th>
-    <th>Skin color</th>
-    <th>Eye color</th>
-    <th>Created</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let person of people">
-    <td>{{ person.name }}</td>
-    <td>{{ person.gender }}</td>
-    <td>{{ person.birthYear }}</td>
-    <td>{{ person.height }}</td>
-    <td>{{ person.mass }}</td>
-    <td>{{ person.hairColor }}</td>
-    <td>{{ person.skinColor }}</td>
-    <td>{{ person.eyeColor }}</td>
-    <td>{{ person.created | date }}</td>
-  </tr>
-  </tbody>
-</table>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let p"> {{ p.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+      <td mat-cell *matCellDef="let p"> {{ p.gender }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="birthYear">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Birth Year </th>
+      <td mat-cell *matCellDef="let p"> {{ p.birthYear }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="height">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Height </th>
+      <td mat-cell *matCellDef="let p"> {{ p.height }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mass">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Mass </th>
+      <td mat-cell *matCellDef="let p"> {{ p.mass }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hairColor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Hair Color </th>
+      <td mat-cell *matCellDef="let p"> {{ p.hairColor }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="skinColor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Skin Color </th>
+      <td mat-cell *matCellDef="let p"> {{ p.skinColor }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="eyeColor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Eye Color </th>
+      <td mat-cell *matCellDef="let p"> {{ p.eyeColor }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+      <td mat-cell *matCellDef="let p"> {{ p.created | date:'medium' }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
