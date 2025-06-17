@@ -1,0 +1,34 @@
+<h2>Planets</h2>
+
+<div *ngIf="isLoading">Loading...</div>
+
+<table *ngIf="!isLoading" border="1">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Climate</th>
+    <th>Terrain</th>
+    <th>Population</th>
+    <th>RotationPeriod</th>
+    <th>OrbitalPeriod</th>
+    <th>Diameter</th>
+    <th>Gravity</th>
+    <th>SurfaceWater</th>
+    <th>Created</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let planet of planets">
+    <td>{{ planet.name }}</td>
+    <td>{{ planet.climate }}</td>
+    <td>{{ planet.terrain }}</td>
+    <td>{{ planet.population }}</td>
+    <td>{{ planet.rotationPeriod }}</td>
+    <td>{{ planet.orbitalPeriod }}</td>
+    <td>{{ planet.diameter }}</td>
+    <td>{{ planet.gravity }}</td>
+    <td>{{ planet.surfaceWater }}</td>
+    <td>{{ planet.created | date }}</td>
+  </tr>
+  </tbody>
+</table>

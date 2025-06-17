@@ -1,12 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SwapiService } from './swapi.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Person } from '../models/person.model';
 import { Planet } from '../models/planet.model';
 
 describe('SwapiService', () => {
   let service: SwapiService;
   let httpMock: HttpTestingController;
+
+  const mockPeople: Person[] = [
+    { name: 'Luke Skywalker', height: '172', mass: '77', hairColor: 'blond', skinColor: 'fair', eyeColor: 'blue', birthYear: '19BBY', gender: 'male', created: '1977-05-25T00:00:00Z' }
+  ];
+
+  const mockPlanets: Planet[] = [
+    { name: 'Tatooine', climate: 'arid', diameter: '10465', gravity: '1 standard', orbitalPeriod: '304', population: '200000', rotationPeriod: '23', surfaceWater: '1', terrain: 'desert', created: '1977-05-25T00:00:00Z' }
+  ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -22,60 +30,23 @@ describe('SwapiService', () => {
     httpMock.verify();
   });
 
-  it('should fetch and normalize people', () => {
-    const mockApiResponse = {
-      results: [
-        {
-          name: 'Luke Skywalker',
-          gender: 'male',
-          birth_year: '19BBY',
-          height: '172',
-          mass: '77',
-          hair_color: 'blond',
-          skin_color: 'fair',
-          eye_color: 'blue',
-          created: '2024-01-01T00:00:00Z',
-        },
-      ],
-    };
-
-    service.getAllPeople().subscribe((people: Person[]) => {
-      expect(people.length).toBe(1);
-      expect(people[0].name).toBe('Luke Skywalker');
-      expect(people[0].birthYear).toBe('19BBY');
+  it('should fetch all people', () => {
+    service.getAllPeople().subscribe((people) => {
+      expect(people).toEqual(mockPeople);
     });
 
-    const req = httpMock.expectOne('https://swapi.dev/api/people');
+    const req = httpMock.expectOne('/api/swapi/people');
     expect(req.request.method).toBe('GET');
-    req.flush(mockApiResponse);
+    req.flush(mockPeople);
   });
 
-  it('should fetch and normalize planets', () => {
-    const mockApiResponse = {
-      results: [
-        {
-          name: 'Tatooine',
-          climate: 'arid',
-          terrain: 'desert',
-          population: '200000',
-          rotation_period: '23',
-          orbital_period: '304',
-          diameter: '10465',
-          gravity: '1 standard',
-          surface_water: '1',
-          created: '2024-01-01T00:00:00Z',
-        },
-      ],
-    };
-
-    service.getAllPlanets().subscribe((planets: Planet[]) => {
-      expect(planets.length).toBe(1);
-      expect(planets[0].name).toBe('Tatooine');
-      expect(planets[0].climate).toBe('arid');
+  it('should fetch all planets', () => {
+    service.getAllPlanets().subscribe((planets) => {
+      expect(planets).toEqual(mockPlanets);
     });
 
-    const req = httpMock.expectOne('https://swapi.dev/api/planets');
+    const req = httpMock.expectOne('/api/swapi/planets');
     expect(req.request.method).toBe('GET');
-    req.flush(mockApiResponse);
+    req.flush(mockPlanets);
   });
 });

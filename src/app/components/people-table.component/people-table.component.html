@@ -1,0 +1,32 @@
+<h2>People</h2>
+
+<div *ngIf="isLoading">Loading...</div>
+
+<table *ngIf="!isLoading" border="1">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Birth Year</th>
+    <th>Height</th>
+    <th>Mass</th>
+    <th>Hair color</th>
+    <th>Skin color</th>
+    <th>Eye color</th>
+    <th>Created</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let person of people">
+    <td>{{ person.name }}</td>
+    <td>{{ person.gender }}</td>
+    <td>{{ person.birthYear }}</td>
+    <td>{{ person.height }}</td>
+    <td>{{ person.mass }}</td>
+    <td>{{ person.hairColor }}</td>
+    <td>{{ person.skinColor }}</td>
+    <td>{{ person.eyeColor }}</td>
+    <td>{{ person.created | date }}</td>
+  </tr>
+  </tbody>
+</table>
