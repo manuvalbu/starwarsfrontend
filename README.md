@@ -1,59 +1,90 @@
-# Starwarsfrontend
+# Star Wars Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+This is the frontend microservice of the **Star Wars Web Application**, developed with Angular. It displays information from the Star Wars universe (People and Planets) in a responsive, sortable, and searchable format.
 
-## Development server
+The application communicates with a backend service that integrates with [SWAPI](https://swapi.py4e.com/), providing access to Star Wars data.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## 🚀 Features
+
+- Display tables of **People** and **Planets**
+- Search by name (case-insensitive)
+- Sort by `name` or `created` (ascending/descending)
+- Pagination (15 items per page)
+- Responsive UI using Angular Material
+- Developed following clean code and software engineering principles
+
+---
+
+## 📦 Project Structure
+
+```
+src/
+├── app/
+│   ├── components/
+│   ├── services/
+│   ├── models/│   
+│   └── app.ts
+├── index.html
+├── main.ts
+
+angular.json
+package.json
+proxy.conf.json
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🧰 Technologies Used
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular
+- Angular Material
+- TypeScript
+- RxJS
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ⚙️ Prerequisites
 
-```bash
-ng generate --help
-```
+- Node.js (v18.x recommended)
+- Angular CLI (`npm install -g @angular/cli`)
 
-## Building
+---
 
-To build the project run:
+## 🛠️ Local Development
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. **Install dependencies**:
 
 ```bash
-ng test
+npm install
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+2. **Run development server**:
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+This will start the frontend at `http://localhost:4200`  
+It will proxy API requests to the backend at `http://localhost:8080`.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## 📊 Backend vs Frontend Logic
+
+Although the backend supports **filtering, sorting and pagination** through its API endpoints, in this specific case, **the frontend retrieves the full dataset from the backend** for both People and Planets.
+
+Given the moderate size of the data, this approach allows the frontend to handle:
+
+- Faster client-side **pagination**
+- Instant **searching/filtering**
+- Responsive **sorting**
+
+This decision favors user experience and responsiveness without compromising performance.
+
+---
+
+
+
