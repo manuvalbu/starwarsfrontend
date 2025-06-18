@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SwapiService } from '../../services/swapi.service';
 import { Person } from '../../models/person.model';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,7 +24,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './people-table.component.html',
   styleUrls: ['./people-table.component.css'],
 })
-export class PeopleTableComponent implements AfterViewInit {
+export class PeopleTableComponent implements OnInit {
   isLoading = false;
   peopleDataSource = new MatTableDataSource<Person>();
   displayedColumns: string[] = [
@@ -39,9 +39,14 @@ export class PeopleTableComponent implements AfterViewInit {
     'created'
   ];
 
+  @ViewChild(MatPaginator)
+  set paginator(paginator: MatPaginator) {
+    this.peopleDataSource.paginator = paginator;
+  }
+
   constructor(private swapiService: SwapiService) {}
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
       this.loadPeople();
     }
 

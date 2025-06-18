@@ -24,7 +24,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './planets-table.component.html',
   styleUrls: ['./planets-table.component.css'],
 })
-export class PlanetsTableComponent implements AfterViewInit {
+export class PlanetsTableComponent implements OnInit {
   isLoading = false;
   planetsDataSource = new MatTableDataSource<Planet>();
   displayedColumns: string[] = [
@@ -40,11 +40,16 @@ export class PlanetsTableComponent implements AfterViewInit {
     'created'
   ];
 
+  @ViewChild(MatPaginator)
+    set paginator(paginator: MatPaginator) {
+      this.planetsDataSource.paginator = paginator;
+    }
+
   constructor(private swapiService: SwapiService) {}
 
-    ngAfterViewInit() {
-        this.loadPlanets();
-      }
+  ngOnInit(): void {
+      this.loadPlanets();
+    }
 
     loadPlanets(): void {
       this.isLoading = true;
