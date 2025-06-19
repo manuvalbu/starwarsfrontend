@@ -86,5 +86,23 @@ This decision favors user experience and responsiveness without compromising per
 
 ---
 
+## Using Docker Compose for Frontend and Backend
+
+This project includes a `docker-compose.yml` file for the **frontend** Angular app that launches both the frontend and the backend services. For this setup to work properly, **both projects (frontend and backend) should be organized as sibling folders at the same directory level** on your filesystem.
+
+- **The backend provides a similar docker-compose file as well. It’s not necessary to run both docker-compose setups; running one of them will launch both frontend and backend.**
+
+### Running the containers
+
+To start both the frontend and backend containers, open a terminal and run the following command **from within the `starwarsfrontend` folder**:
+```bash
+docker-compose up
+```
+This will build both images and start the containers.
+
+To stop the containers, press Ctrl + C and then run:
+```bash
+docker-compose down
+```
 
 
